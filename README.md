@@ -1,5 +1,5 @@
 # Compass React Native (Non Expo)
-A simple compass app built with react-native. No expo. Expo version can be found here [here](https://github.com/rahulhaque/compass-react-native).
+A simple compass app built with react-native. No expo. Expo version can be found [here](https://github.com/rahulhaque/compass-react-native).
 
 
 ## Description
