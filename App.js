@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { Text, View, Image, Dimensions } from "react-native";
-import { Grid, Col, Row } from "react-native-easy-grid";
-import { magnetometer } from "react-native-sensors";
+import React, {Component} from "react";
+import {Text, View, Image, Dimensions} from "react-native";
+import {Grid, Col, Row} from "react-native-easy-grid";
+import {magnetometer, SensorTypes, setUpdateIntervalForType} from "react-native-sensors";
 
-const { height, width } = Dimensions.get("window");
+const {height, width} = Dimensions.get("window");
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      magnetometerData: "0",
+      magnetometer: "0",
     };
   }
 
@@ -30,8 +30,10 @@ export default class App extends Component {
   };
 
   _subscribe = async () => {
-    this._subscription = magnetometer.subscribe(sensorData =>
-      this.setState({ magnetometerData: this._angle(sensorData) }),
+    setUpdateIntervalForType(SensorTypes.magnetometer, 100);
+    this._subscription = magnetometer.subscribe(
+      sensorData => this.setState({magnetometer: this._angle(sensorData)}),
+      error => console.log("The sensor is not available"),
     );
   };
 
@@ -40,18 +42,16 @@ export default class App extends Component {
     this._subscription = null;
   };
 
-  _angle = magnetometerData => {
+  _angle = magnetometer => {
     let angle = 0;
-    if (magnetometerData) {
-      let { x, y } = magnetometerData;
-
+    if (magnetometer) {
+      let {x, y} = magnetometer;
       if (Math.atan2(y, x) >= 0) {
         angle = Math.atan2(y, x) * (180 / Math.PI);
       } else {
         angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
       }
     }
-
     return Math.round(angle);
   };
 
@@ -76,17 +76,17 @@ export default class App extends Component {
   };
 
   // Match the device top with pointer 0° degree. (By default 0° starts from the right of the device.)
-  _degree = magnetometerData => {
-    return magnetometerData - 90 >= 0
-      ? magnetometerData - 90
-      : magnetometerData + 271;
+  _degree = magnetometer => {
+    return magnetometer - 90 >= 0
+      ? magnetometer - 90
+      : magnetometer + 271;
   };
 
   render() {
     return (
-      <Grid style={{ backgroundColor: "black" }}>
-        <Row style={{ alignItems: "center" }} size={0.9}>
-          <Col style={{ alignItems: "center" }}>
+      <Grid style={{backgroundColor: "black"}}>
+        <Row style={{alignItems: "center"}} size={0.9}>
+          <Col style={{alignItems: "center"}}>
             <Text
               style={{
                 color: "#fff",
@@ -94,14 +94,14 @@ export default class App extends Component {
                 fontWeight: "bold",
               }}
             >
-              {this._direction(this._degree(this.state.magnetometerData))}
+              {this._direction(this._degree(this.state.magnetometer))}
             </Text>
           </Col>
         </Row>
 
-        <Row style={{ alignItems: "center" }} size={0.1}>
-          <Col style={{ alignItems: "center" }}>
-            <View style={{ width: width, alignItems: "center", bottom: 0 }}>
+        <Row style={{alignItems: "center"}} size={0.1}>
+          <Col style={{alignItems: "center"}}>
+            <View style={{width: width, alignItems: "center", bottom: 0}}>
               <Image
                 source={require("./assets/compass_pointer.png")}
                 style={{
@@ -113,7 +113,7 @@ export default class App extends Component {
           </Col>
         </Row>
 
-        <Row style={{ alignItems: "center" }} size={2}>
+        <Row style={{alignItems: "center"}} size={2}>
           <Text
             style={{
               color: "#fff",
@@ -123,10 +123,10 @@ export default class App extends Component {
               textAlign: "center",
             }}
           >
-            {this._degree(this.state.magnetometerData)}°
+            {this._degree(this.state.magnetometer)}°
           </Text>
 
-          <Col style={{ alignItems: "center" }}>
+          <Col style={{alignItems: "center"}}>
             <Image
               source={require("./assets/compass_bg.png")}
               style={{
@@ -135,16 +135,16 @@ export default class App extends Component {
                 alignItems: "center",
                 resizeMode: "contain",
                 transform: [
-                  { rotate: 360 - this.state.magnetometerData + "deg" },
+                  {rotate: 360 - this.state.magnetometer + "deg"},
                 ],
               }}
             />
           </Col>
         </Row>
 
-        <Row style={{ alignItems: "center" }} size={1}>
-          <Col style={{ alignItems: "center" }}>
-            <Text style={{ color: "#fff" }}>Copyright @RahulHaque</Text>
+        <Row style={{alignItems: "center"}} size={1}>
+          <Col style={{alignItems: "center"}}>
+            <Text style={{color: "#fff"}}>Copyright @RahulHaque</Text>
           </Col>
         </Row>
       </Grid>
