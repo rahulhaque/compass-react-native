@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Text, View, Image, Dimensions} from "react-native";
 import {Grid, Col, Row} from "react-native-easy-grid";
 import {magnetometer, SensorTypes, setUpdateIntervalForType} from "react-native-sensors";
+import LPF from "lpf";
 
 const {height, width} = Dimensions.get("window");
 
@@ -11,6 +12,8 @@ export default class App extends Component {
     this.state = {
       magnetometer: "0",
     };
+    LPF.init([]);
+    LPF.smoothing = 0.2;
   }
 
   componentDidMount() {
@@ -30,7 +33,7 @@ export default class App extends Component {
   };
 
   _subscribe = async () => {
-    setUpdateIntervalForType(SensorTypes.magnetometer, 100);
+    setUpdateIntervalForType(SensorTypes.magnetometer, 16);
     this._subscription = magnetometer.subscribe(
       sensorData => this.setState({magnetometer: this._angle(sensorData)}),
       error => console.log("The sensor is not available"),
@@ -52,7 +55,7 @@ export default class App extends Component {
         angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
       }
     }
-    return Math.round(angle);
+    return Math.round(LPF.next(angle));
   };
 
   _direction = degree => {
