@@ -1,20 +1,26 @@
-# Compass React Native (Non Expo)
-A simple compass app built with react-native. No expo. Expo version can be found [here](https://github.com/rahulhaque/compass-react-native).
+# Compass React Native 🧭
+A simple compass app built with react-native. Expo version can be found [here](https://github.com/rahulhaque/compass-react-native-expo). This project is overall an example for anyone trying to work with sensors/magnetometer in react native.
 
 ## Description
-A very simple demonstration of how to use device's built in `Magnetometer` sensor to identify direction and calculate degree of angle. This app uses the package [react-native-sensors](https://github.com/react-native-sensors/react-native-sensors).
-
-## Todo
-- Build and test the app on iOS device.
-(I am yet to own a Mac, so that I can install Xcode and build iOS version of the app. That's why, the `/ios` directory does not contain any dependencies or config required for the `react-native-sensors`)
+A very simple demonstration of how to use device's built in `Magnetometer` sensor to identify direction and calculate degree of angle. This app makes use of the below packages - 
+- [React-Native-Sensors](https://github.com/react-native-sensors/react-native-sensors) for magnetometer data.
+- [Low-Pass-Filter](https://github.com/uhho/LPF) to reduce sensor data fluctation.
 
 ## Run the App
 - Clone or download the repository.
 - `cd` into directory.
 - Run `npm install`
-- Copy your `debug.keystore` to `/android/app`
+- Copy your `debug.keystore` from Android Studio to project `/android/app`
 - Connect your device in `USB debugging` mode or use Android emulator.
 - Then run `react-native run-android`.
 
+## To-do
+- Build and test the app on iOS devices. The `/ios` directory does not contain any dependencies or config.
+
+(Yet to own a Mac 💻 donate me one 😅).
+
 ## Screenshots
-![Compass](https://github.com/rahulhaque/compass-react-native-non-expo/blob/master/screenshots/image.png)
+<img title="Compass" src="https://github.com/rahulhaque/compass-react-native-non-expo/blob/master/screenshots/image.png" width="300">
+
+## Info
+Share the project and spare a 🟊 if helped.
