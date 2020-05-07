@@ -1,5 +1,5 @@
 # Compass React Native 🧭
-A simple compass app built with react-native. Expo version can be found [here](https://github.com/rahulhaque/compass-react-native-expo). This project is overall an example for anyone trying to work with sensors/magnetometer in react native.
+A simple compass app built with react-native solely for learning purpose. Expo version can be found [here](https://github.com/rahulhaque/compass-react-native-expo). This project is overall an example for anyone trying to work with sensors/magnetometer in react native.
 
 ## Description
 A very simple demonstration of how to use device's built in `Magnetometer` sensor to identify direction and calculate degree of angle. This app makes use of the below packages - 
@@ -15,9 +15,7 @@ A very simple demonstration of how to use device's built in `Magnetometer` senso
 - Then run `react-native run-android`.
 
 ## To-do
-- Build and test the app on iOS devices. The `/ios` directory does not contain any dependencies or config.
-
-(Yet to own a Mac 💻 donate me one 😅).
+- Build and test the app on iOS devices. The `/ios` directory does not contain any dependencies or config. (Yet to own a Mac 💻).
 
 ## Screenshots
 <img title="Compass" src="https://github.com/rahulhaque/compass-react-native-non-expo/blob/master/screenshots/image.png" width="300">
