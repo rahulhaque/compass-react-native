@@ -18,7 +18,7 @@ A very simple demonstration of how to use device's built in `Magnetometer` senso
 - Build and test the app on iOS devices. The `/ios` directory does not contain any dependencies or config. (Yet to own a Mac 💻).
 
 ## Screenshots
-<img title="Compass" src="https://github.com/rahulhaque/compass-react-native-non-expo/blob/master/screenshots/image.png" width="300">
+<img title="Compass" src="https://github.com/rahulhaque/compass-react-native/blob/master/screenshots/image.png" width="300">
 
 ## Info
 Share the project and spare a 🟊 if helped.
